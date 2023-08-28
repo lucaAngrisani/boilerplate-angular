@@ -1,1 +1,6 @@
+<button (click)="updateAppState()"> UPDATE APP STATE </button>
+<button (click)="removeAppState()"> REMOVE APP STATE </button>
+<p>{{(appState$ | async ) | json}}</p>
+<p>{{(appStateWrapped$ | async ) | json}}</p>
+
 <router-outlet></router-outlet>
