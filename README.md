@@ -1,10 +1,6 @@
 # Boilerplate Angular
 
-This project is a boilerplate for Angular. Actual version version 16.1.4.
-
-## Structure
-
-We decide to implement SCAM pattern with standalones.
+This project is a boilerplate for Angular. Actual version version 17.3.3
 
 ### Components vs Pages
 

@@ -10,13 +10,14 @@ import { ROUTE } from 'src/app/shared/route.enum';
 })
 export default class HomeComponent implements OnInit {
 
-  ROUTE = ROUTE;
-
   constructor(
-    public router: Router,
+    private router: Router,
   ) { }
 
   ngOnInit() {
   }
 
+  goToLogin() {
+    this.router.navigate([ROUTE.PUBLIC, ROUTE.LOGIN]);
+  }
 }

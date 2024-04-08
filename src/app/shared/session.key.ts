@@ -1,3 +1,3 @@
-export class SESSION_KEY {
-  public static KEY_USER: string = "ARVAX_USER";
+export const enum SESSION_KEY {
+  KEY_USER = "KEY_USER_VALUE"
 }
