@@ -8,17 +8,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment.prod';
-import { AppComponent } from './app.component';
-import { appRoutes } from './app.routing';
+import { appRoutes } from './app.routes';
 import { HttpInterceptorService } from "./services/http-interceptor.service";
 import { InitService } from "./services/init.service";
 import { AppEffects } from './store/effects/app.effects';
 import { appReducer } from './store/reducers/app.reducer';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { preloadingStrategy: environment.production ? PreloadAllModules : null }),
@@ -65,7 +61,6 @@ import { appReducer } from './store/reducers/app.reducer';
       provide: LOCALE_ID,
       useValue: "it-IT"
     },
-  ],
-  bootstrap: [AppComponent]
+  ]
 })
 export class AppModule { }

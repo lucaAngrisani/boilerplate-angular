@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { removeAppState, updateAppState } from './store/actions/app.actions';
@@ -7,8 +9,10 @@ import { StoreModel } from './store/store.model';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  imports: [CommonModule, RouterOutlet]
 })
 export class AppComponent {
 
