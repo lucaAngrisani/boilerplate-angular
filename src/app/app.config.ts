@@ -1,22 +1,27 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { PreloadAllModules, provideRouter, withComponentInputBinding, withPreloading } from '@angular/router';
+import { NoPreloading, PreloadAllModules, provideRouter, withComponentInputBinding, withPreloading } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { appRoutes } from './app.routes';
+import { AppEffects } from './store/effects/app.effects';
+import { appReducer } from './store/reducers/app.reducer';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
-export const appConfig: ApplicationConfig = {
+export const appConfig = {
   providers: [
     provideAnimations(),
+
     provideRouter(
       appRoutes,
       withComponentInputBinding(),
-      withPreloading(isDevMode() ? null : PreloadAllModules)
+      withPreloading(isDevMode() ? NoPreloading : PreloadAllModules)
     ),
 
     /** CONSIDER TO USE HttpClientModule FOR HttpRequest */
@@ -33,5 +38,12 @@ export const appConfig: ApplicationConfig = {
       })
     ),
 
+    /** CONSIDER TO USE NgRx */
+    importProvidersFrom(
+      StoreModule.forRoot({
+        appState: appReducer
+      }),
+      EffectsModule.forRoot([AppEffects])
+    )
   ]
 };
