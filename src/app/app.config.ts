@@ -18,6 +18,8 @@ export const appConfig = {
   providers: [
     provideAnimations(),
 
+    //provideExperimentalZonelessChangeDetection(),
+
     provideRouter(
       appRoutes,
       withComponentInputBinding(),
