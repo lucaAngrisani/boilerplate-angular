@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { importProvidersFrom, isDevMode } from '@angular/core';
+import { importProvidersFrom, isDevMode, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NoPreloading, PreloadAllModules, provideRouter, withComponentInputBinding, withPreloading } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,7 +18,7 @@ export const appConfig = {
   providers: [
     provideAnimations(),
 
-    //provideExperimentalZonelessChangeDetection(),
+    provideExperimentalZonelessChangeDetection(),
 
     provideRouter(
       appRoutes,
