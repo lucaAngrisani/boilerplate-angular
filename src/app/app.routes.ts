@@ -1,6 +1,5 @@
-import { inject } from "@angular/core";
 import { Routes } from "@angular/router";
-import { AuthGuard } from "./guards/auth.guard";
+import { authGuard } from "./guards/auth.guard";
 import { ROUTE } from "./shared/route.enum";
 
 export const appRoutes: Routes = [
@@ -15,7 +14,7 @@ export const appRoutes: Routes = [
   },
   {
     path: ROUTE.AUTH,
-    canActivate: [() => inject(AuthGuard).canActivate()],
+    canActivate: [authGuard],
     loadChildren: () => import("./pages/auth/auth.module"),
   },
   { path: "**", redirectTo: ROUTE.AUTH },

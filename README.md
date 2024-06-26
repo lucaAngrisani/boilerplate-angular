@@ -1,6 +1,6 @@
 # Boilerplate Angular
 
-This project is a boilerplate for Angular. Actual version version 17.3.3
+This project is a boilerplate for Angular. Actual version version ^18.0.1
 
 ### Components vs Pages
 
