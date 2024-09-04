@@ -17,9 +17,6 @@ export class User {
     this.code = user?.code;
   }
 
-  toSession?(): Object {
-    return { ...this };
-  }
 }
 
 /** suggest to use https://www.npmjs.com/package/mapper-factory */

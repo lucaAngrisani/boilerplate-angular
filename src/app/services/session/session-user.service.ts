@@ -20,7 +20,7 @@ export class SessionUserService {
     this.userLogged.set(_user);
 
     this.sss.remove(SESSION_KEY.KEY_USER);
-    this.sss.save(SESSION_KEY.KEY_USER, _user.toSession());
+    this.sss.save(SESSION_KEY.KEY_USER, _user);
   }
 
   public getCurrentUser(): User {
