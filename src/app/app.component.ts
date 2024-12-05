@@ -8,11 +8,10 @@ import { selectAppState, selectAppStateWrapped } from './store/selectors/app.sel
 import { StoreModel } from './store/store.model';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, RouterOutlet]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [CommonModule, RouterOutlet]
 })
 export class AppComponent {
 

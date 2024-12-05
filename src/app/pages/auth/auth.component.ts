@@ -4,9 +4,10 @@ import { SessionUserService } from 'src/app/services/session/session-user.servic
 import { ROUTE } from 'src/app/shared/route.enum';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+    selector: 'app-auth',
+    templateUrl: './auth.component.html',
+    styleUrls: ['./auth.component.css'],
+    standalone: false
 })
 export class AuthComponent implements OnInit {
 
