@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  standalone: true,
   selector: 'app-bottombar',
   templateUrl: './bottombar.component.html',
   styleUrls: ['./bottombar.component.css']

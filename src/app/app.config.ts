@@ -6,7 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { appRoutes } from './app.routes';
+import { appRoutes } from './router/app.routes';
 import { AppEffects } from './store/effects/app.effects';
 import { appReducer } from './store/reducers/app.reducer';
 

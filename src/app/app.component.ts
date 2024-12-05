@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -8,10 +8,13 @@ import { selectAppState, selectAppStateWrapped } from './store/selectors/app.sel
 import { StoreModel } from './store/store.model';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [CommonModule, RouterOutlet]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  imports: [
+    JsonPipe,
+    AsyncPipe,
+    RouterOutlet,
+  ]
 })
 export class AppComponent {
 
