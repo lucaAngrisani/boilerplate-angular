@@ -1,6 +1,6 @@
-<button (click)="updateAppState()"> UPDATE APP STATE </button>
-<button (click)="removeAppState()"> REMOVE APP STATE </button>
-<p>{{(appState$ | async ) | json}}</p>
-<p>{{(appStateWrapped$ | async ) | json}}</p>
+<button (click)="switchLang()">SWITCH LANG</button>
+<button (click)="switchTheme()">SWITCH THEME</button>
+<button (click)="resetState()">RESET STATE</button>
+<p>{{ store.prefs() | json }}</p>
 
 <router-outlet></router-outlet>

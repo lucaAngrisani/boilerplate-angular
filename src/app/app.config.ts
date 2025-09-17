@@ -1,24 +1,26 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { importProvidersFrom, isDevMode, provideExperimentalZonelessChangeDetection } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { NoPreloading, PreloadAllModules, provideRouter, withComponentInputBinding, withPreloading } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideHttpClient } from '@angular/common/http';
+import {
+  inject,
+  isDevMode,
+  provideAppInitializer,
+  provideZonelessChangeDetection,
+} from '@angular/core';
+import {
+  NoPreloading,
+  PreloadAllModules,
+  provideRouter,
+  withComponentInputBinding,
+  withPreloading,
+} from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { appRoutes } from './router/app.routes';
-import { AppEffects } from './store/effects/app.effects';
-import { appReducer } from './store/reducers/app.reducer';
-
-export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
-}
+import { SessionStore } from './stores/session.store';
+import { initApp } from './functions/init.function';
 
 export const appConfig = {
   providers: [
-    provideAnimations(),
-
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection(),
 
     provideRouter(
       appRoutes,
@@ -29,23 +31,22 @@ export const appConfig = {
     /** CONSIDER TO USE HttpClientModule FOR HttpRequest */
     provideHttpClient(),
 
-    /** CONSIDER TO USE TranslateModule FOR i18n */
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
-      })
-    ),
-
-    /** CONSIDER TO USE NgRx */
-    importProvidersFrom(
-      StoreModule.forRoot({
-        appState: appReducer
+    /** CONSIDER TO USE ngx-translate FOR i18n */
+    provideTranslateService({
+      lang: 'en',
+      fallbackLang: 'en',
+      defaultLanguage: 'en',
+      loader: provideTranslateHttpLoader({
+        prefix: 'assets/i18n/',
+        suffix: '.json',
       }),
-      EffectsModule.forRoot([AppEffects])
-    )
-  ]
+    }),
+
+    /** CONSIDER TO USE NgRx (signal based) */
+    provideAppInitializer(() => {
+      const session = inject(SessionStore);
+      session.hydrate();
+      initApp();
+    }),
+  ],
 };

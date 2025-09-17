@@ -1,38 +1,31 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { removeAppState, updateAppState } from './store/actions/app.actions';
-import { selectAppState, selectAppStateWrapped } from './store/selectors/app.selectors';
-import { StoreModel } from './store/store.model';
+import { SessionStore } from './stores/session.store';
+import { LANG } from './enums/lang.enum';
+import { THEME } from './enums/theme.enum';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [
-    JsonPipe,
-    AsyncPipe,
-    RouterOutlet,
-  ]
+  imports: [JsonPipe, RouterOutlet],
 })
 export class AppComponent {
+  public readonly store = inject(SessionStore);
 
-  appState$: Observable<Object>;
-  appStateWrapped$: Observable<Object>;
-
-  constructor(
-    private store: Store<StoreModel>
-  ) {
-    this.appState$ = store.select(selectAppState);
-    this.appStateWrapped$ = store.select(selectAppStateWrapped);
+  switchLang() {
+    this.store.setLang(
+      this.store.langSelected() === LANG.EN ? LANG.IT : LANG.EN
+    );
   }
 
-  updateAppState() {
-    this.store.dispatch(updateAppState({ newState: true, date: new Date() }));
+  switchTheme() {
+    this.store.setTheme(
+      this.store.themeSelected() === THEME.DARK ? THEME.LIGHT : THEME.DARK
+    );
   }
 
-  removeAppState() {
-    this.store.dispatch(removeAppState());
+  resetState() {
+    this.store.resetPrefs();
   }
 }
