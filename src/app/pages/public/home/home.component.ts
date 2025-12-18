@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ROUTE } from 'src/app/shared/route.enum';
+import { UserFormComponent } from "src/app/components/user-form/user-form.component";
 
 @Component({
   standalone: true,
@@ -9,8 +10,9 @@ import { ROUTE } from 'src/app/shared/route.enum';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   imports: [
-    TranslatePipe
-  ]
+    TranslatePipe,
+    UserFormComponent,
+]
 })
 export default class HomeComponent implements OnInit {
 

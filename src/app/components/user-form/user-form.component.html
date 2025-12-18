@@ -1,0 +1,93 @@
+<form (submit)="submit()">
+  @for(userForm of userFormList().value().users; track $index) {
+  {{$index}} - {{ userFormList.users[$index] | json }}
+  <section
+    [style]="
+      'display: flex; flex-direction: column; gap: 8px; border: 1px solid #ccc; padding: 16px; border-radius: 8px;'
+    "
+  >
+    <input
+      title="firstName"
+      placeholder="firstName"
+      type="text"
+      [field]="userFormList.users[$index].firstName"
+    />
+    <input
+      title="lastName"
+      placeholder="lastName"
+      type="text"
+      [field]="userFormList.users[$index].lastName"
+    />
+    <input
+      title="email"
+      placeholder="email"
+      type="email"
+      [field]="userFormList.users[$index].email"
+    />
+    <section [style]="'display: flex; gap: 8px;'">
+      <input
+        title="address.street"
+        placeholder="address.street"
+        type="text"
+        [field]="userFormList.users[$index].address.street"
+      />
+      <input
+        title="address.city"
+        placeholder="address.city"
+        type="text"
+        [field]="userFormList.users[$index].address.city"
+      />
+      <input
+        title="address.state"
+        placeholder="address.state"
+        type="text"
+        [field]="userFormList.users[$index].address.state"
+      />
+      <input
+        title="address.zip"
+        placeholder="address.zip"
+        type="text"
+        [field]="userFormList.users[$index].address.zip"
+      />
+      <button type="button" (click)="deleteUserForm($index)">
+        Delete user
+      </button>
+
+      <button type="button" (click)="updateFormValue(userFormList.users[$index])">
+        Update Form Value
+      </button>
+    </section>
+
+    <section>
+      <p>RESULTS: {{ userFormList.users[$index]().value() | json }}</p>
+    </section>
+  </section>
+  }
+
+  <section style="margin-top: 16px; display: flex; gap: 8px">
+    <button type="button" (click)="addUserForm()">Add user</button>
+    <button type="button" (click)="userFormList().reset()">Reset</button>
+    <button type="button" (click)="userFormList().markAsTouched()">
+      Mark as Touched
+    </button>
+    <button type="button" (click)="userFormList().markAsDirty()">
+      Mark as Dirty
+    </button>
+    <button type="submit">submit</button>
+  </section>
+</form>
+
+<section>
+  <p>TOUCHED: {{ userFormList().touched() }}</p>
+  <p>DIRTY: {{ userFormList().dirty() }}</p>
+  <p>INVALID: {{ userFormList().invalid() }}</p>
+  <p>VALID: {{ userFormList().valid() }}</p>
+</section>
+
+for more:
+<a
+  href="https://angular.dev/essentials/signal-forms"
+  target="_blank"
+  rel="noopener noreferrer"
+  >https://angular.dev/essentials/signal-forms</a
+>

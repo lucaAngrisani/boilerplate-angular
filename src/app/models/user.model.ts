@@ -1,3 +1,5 @@
+import { Address } from "./address.model";
+
 export class User {
   id: string;
 
@@ -7,6 +9,8 @@ export class User {
 
   code: string;
 
+  address?: Address;
+
   constructor(user?: User) {
     this.id = user?.id;
 
@@ -15,6 +19,8 @@ export class User {
     this.email = user?.email;
 
     this.code = user?.code;
+
+    this.address = user?.address ? new Address(user.address) : new Address();
   }
 
 }
