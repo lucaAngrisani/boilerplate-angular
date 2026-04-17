@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SessionStore } from './stores/session.store';
+import { ApplicationStore } from './stores/application.store';
 import { LANG } from './enums/lang.enum';
 import { THEME } from './enums/theme.enum';
 
@@ -11,7 +11,7 @@ import { THEME } from './enums/theme.enum';
   imports: [JsonPipe, RouterOutlet],
 })
 export class AppComponent {
-  public readonly store = inject(SessionStore);
+  public readonly store = inject(ApplicationStore);
 
   switchLang() {
     this.store.setLang(

@@ -15,7 +15,7 @@ import {
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { appRoutes } from './router/app.routes';
-import { SessionStore } from './stores/session.store';
+import { ApplicationStore } from './stores/application.store';
 import { initApp } from './functions/init.function';
 
 export const appConfig = {
@@ -44,7 +44,7 @@ export const appConfig = {
 
     /** CONSIDER TO USE NgRx (signal based) */
     provideAppInitializer(() => {
-      const session = inject(SessionStore);
+      const session = inject(ApplicationStore);
       session.hydrate();
       initApp();
     }),

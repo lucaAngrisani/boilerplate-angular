@@ -17,7 +17,7 @@ const DEFAULT_STATE: SessionState = {
   loading: false,
 };
 
-export const SessionStore = signalStore(
+export const ApplicationStore = signalStore(
   { providedIn: 'root' },
   withState<SessionState>(DEFAULT_STATE),
 
@@ -77,7 +77,7 @@ export const SessionStore = signalStore(
           prefs: { ...DEFAULT_STATE.prefs, ...(parsed.prefs ?? {}) },
         });
       } catch (e) {
-        console.warn('[SessionStore] hydrate parse error', e);
+        console.warn('[ApplicationStore] hydrate parse error', e);
       }
     }
 

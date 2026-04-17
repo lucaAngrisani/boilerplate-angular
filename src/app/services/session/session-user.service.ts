@@ -1,18 +1,16 @@
-import { Injectable, WritableSignal, signal } from "@angular/core";
-import { User } from "src/app/models/user.model";
-import { SESSION_KEY } from "../../shared/session.key";
-import { SessionStorageService } from "./session-storage.service";
+import { Injectable, WritableSignal, signal } from '@angular/core';
+import { SESSION_KEY } from '../../shared/session.key';
+import { SessionStorageService } from './session-storage.service';
+import { User } from '../../models/user.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class SessionUserService {
   public userLogged: WritableSignal<User | null> = signal(null);
 
   /** YOU CAN USE BOTH SessionStorageService AND/OR LocalStorageService */
-  constructor(
-    private sss: SessionStorageService,
-  ) {
+  constructor(private sss: SessionStorageService) {
     this.setCurrentUser(this.getCurrentUser());
   }
 

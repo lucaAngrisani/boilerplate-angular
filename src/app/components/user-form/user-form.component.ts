@@ -7,13 +7,11 @@ import {
   email,
   debounce,
   FieldTree,
-  min,
-  minLength,
   applyEach,
   SchemaPathTree,
 } from '@angular/forms/signals';
-import { Address } from 'src/app/models/address.model';
-import { User } from 'src/app/models/user.model';
+import { User } from '../../models/user.model';
+import { Address } from '../../models/address.model';
 
 @Component({
   selector: 'app-user-form',

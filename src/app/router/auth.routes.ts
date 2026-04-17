@@ -1,15 +1,15 @@
 import { Routes } from "@angular/router";
-import { ROUTE } from "src/app/shared/route.enum";
+import { ROUTE } from "src/app/router/routes/route";
 
 export const authRoutes: Routes = [
     {
         path: "",
-        redirectTo: `${ROUTE.HOME}`,
+        redirectTo: `${ROUTE.AUTH.HOME}`,
         pathMatch: "full",
     },
     {
-        path: ROUTE.HOME,
+        path: ROUTE.AUTH.HOME,
         loadComponent: () => import("../pages/auth/home/home.component"),
     },
-    { path: "**", redirectTo: ROUTE.HOME },
+    { path: "**", redirectTo: ROUTE.AUTH.HOME },
 ];

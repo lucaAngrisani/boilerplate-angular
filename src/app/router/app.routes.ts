@@ -1,24 +1,24 @@
-import { Routes } from "@angular/router";
-import { authGuard } from "../guards/auth.guard";
-import { ROUTE } from "../shared/route.enum";
-import { publicRoutes } from "./public.routes";
+import { Routes } from '@angular/router';
+import { authGuard } from '../guards/auth.guard';
+import { ROUTE } from './routes/route';
+import { publicRoutes } from './public.routes';
 
 export const appRoutes: Routes = [
   {
-    path: "",
-    redirectTo: `${ROUTE.AUTH}`,
-    pathMatch: "full",
+    path: '',
+    redirectTo: `${ROUTE.AUTH.BASE_PATH}`,
+    pathMatch: 'full',
   },
   {
-    path: ROUTE.PUBLIC,
-    loadComponent: () => import("../pages/public/public.component"),
+    path: ROUTE.PUBLIC.BASE_PATH,
+    loadComponent: () => import('../layouts/base-layout/base-layout.component'),
     children: publicRoutes,
   },
   {
-    path: ROUTE.AUTH,
+    path: ROUTE.AUTH.BASE_PATH,
     canActivate: [authGuard],
-    loadComponent: () => import("../pages/auth/auth.component"),
+    loadComponent: () => import('../layouts/auth-layout/auth-layout.component'),
     children: publicRoutes,
   },
-  { path: "**", redirectTo: ROUTE.AUTH },
-]
+  { path: '**', redirectTo: ROUTE.AUTH.BASE_PATH },
+];
