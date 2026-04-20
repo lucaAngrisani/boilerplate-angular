@@ -10,44 +10,44 @@
       title="firstName"
       placeholder="firstName"
       type="text"
-      [field]="userFormList.users[$index].firstName"
+      [formField]="userFormList.users[$index].firstName"
     />
     <input
       title="lastName"
       placeholder="lastName"
       type="text"
-      [field]="userFormList.users[$index].lastName"
+      [formField]="userFormList.users[$index].lastName"
     />
     <input
       title="email"
       placeholder="email"
       type="email"
-      [field]="userFormList.users[$index].email"
+      [formField]="userFormList.users[$index].email"
     />
     <section [style]="'display: flex; gap: 8px;'">
       <input
         title="address.street"
         placeholder="address.street"
         type="text"
-        [field]="userFormList.users[$index].address.street"
+        [formField]="userFormList.users[$index].address.street"
       />
       <input
         title="address.city"
         placeholder="address.city"
         type="text"
-        [field]="userFormList.users[$index].address.city"
+        [formField]="userFormList.users[$index].address.city"
       />
       <input
         title="address.state"
         placeholder="address.state"
         type="text"
-        [field]="userFormList.users[$index].address.state"
+        [formField]="userFormList.users[$index].address.state"
       />
       <input
         title="address.zip"
         placeholder="address.zip"
         type="text"
-        [field]="userFormList.users[$index].address.zip"
+        [formField]="userFormList.users[$index].address.zip"
       />
       <button type="button" (click)="deleteUserForm($index)">
         Delete user

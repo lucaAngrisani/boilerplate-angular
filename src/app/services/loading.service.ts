@@ -1,32 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, computed, signal } from '@angular/core';
 
 /**
  * Loading service
  */
 @Injectable({ providedIn: 'root' })
 export class LoadingService {
+  private readonly loadingMap = signal<Map<string, boolean>>(new Map());
+  readonly isLoading = computed(() => this.loadingMap().size > 0);
 
-  loadingSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  loadingMap: Map<string, boolean> = new Map<string, boolean>();
+  setLoading(loading: boolean, url: string): void {
+    if (!url) throw new Error('An url occurred');
 
-  constructor() { }
-
-  setLoading(caricamento: boolean, url: string): void {
-    if (!url)
-      throw new Error('An url occurred');
-
-    if (caricamento === true) {
-      this.loadingMap.set(url, caricamento);
-      this.loadingSub.next(true);
-    }
-    else if (caricamento === false && this.loadingMap.has(url)) {
-      this.loadingMap.delete(url);
-    }
-
-    if (this.loadingMap.size === 0)
-      this.loadingSub.next(false);
-
+    this.loadingMap.update((map) => {
+      const next = new Map(map);
+      if (loading) {
+        next.set(url, true);
+      } else {
+        next.delete(url);
+      }
+      return next;
+    });
   }
-
 }

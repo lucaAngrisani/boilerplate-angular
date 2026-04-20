@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import MenuComponent from '../../components/menu/menu.component';
 import HeaderComponent from '../../components/header/header.component';
 import FooterComponent from '../../components/footer/footer.component';
@@ -9,15 +9,13 @@ import { ROUTE } from '../../router/routes/route';
 @Component({
   selector: 'app-auth-layout',
   templateUrl: './auth-layout.component.html',
-  imports: [MenuComponent, HeaderComponent, FooterComponent],
+  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterOutlet],
 })
 export default class AuthLayoutComponent {
-  constructor(
-    private router: Router,
-    private sessionUserService: SessionUserService,
-  ) {}
+  private readonly router = inject(Router);
+  private readonly sessionUserService = inject(SessionUserService);
 
-  logOut() {
+  logOut(): void {
     this.sessionUserService.removeUser();
     this.router.navigate([ROUTE.PUBLIC.BASE_PATH]);
   }

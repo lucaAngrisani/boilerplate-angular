@@ -1,6 +1,6 @@
-<button (click)="switchLang()">SWITCH LANG</button>
-<button (click)="switchTheme()">SWITCH THEME</button>
-<button (click)="resetState()">RESET STATE</button>
+<button type="button" aria-label="Switch language" (click)="switchLang()">SWITCH LANG</button>
+<button type="button" aria-label="Switch theme" (click)="switchTheme()">SWITCH THEME</button>
+<button type="button" aria-label="Reset state" (click)="resetState()">RESET STATE</button>
 <p>{{ store.prefs() | json }}</p>
 
 <router-outlet></router-outlet>

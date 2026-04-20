@@ -9,7 +9,7 @@ import { SessionState } from './models/session.model';
 import { THEME } from '../enums/theme.enum';
 import { LANG } from '../enums/lang.enum';
 import { Prefs } from './models/prefs.model';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { LangService } from '../services/lang.service';
 
 const DEFAULT_STATE: SessionState = {
@@ -21,10 +21,10 @@ export const ApplicationStore = signalStore(
   { providedIn: 'root' },
   withState<SessionState>(DEFAULT_STATE),
 
-  withComputed((s) => ({
-    isLoading: () => !!s.loading(),
-    themeSelected: () => s.prefs().theme,
-    langSelected: () => s.prefs().lang,
+  withComputed(({ loading, prefs }) => ({
+    isLoading: computed(() => !!loading()),
+    themeSelected: computed(() => prefs().theme),
+    langSelected: computed(() => prefs().lang),
   })),
 
   withMethods((store) => {
@@ -50,7 +50,6 @@ export const ApplicationStore = signalStore(
 
     function setLoading(loading: boolean) {
       patchState(store, { loading });
-      persist();
     }
 
     // --- Persistence ---

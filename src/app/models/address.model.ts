@@ -4,10 +4,10 @@ export class Address {
   state: string;
   zip: string;
 
-  constructor(user?: Address) {
-    this.street = user?.street;
-    this.city = user?.city;
-    this.state = user?.state;
-    this.zip = user?.zip;
+  constructor(data?: Partial<Address>) {
+    this.street = data?.street ?? '';
+    this.city   = data?.city   ?? '';
+    this.state  = data?.state  ?? '';
+    this.zip    = data?.zip    ?? '';
   }
 }

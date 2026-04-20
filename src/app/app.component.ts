@@ -11,21 +11,21 @@ import { THEME } from './enums/theme.enum';
   imports: [JsonPipe, RouterOutlet],
 })
 export class AppComponent {
-  public readonly store = inject(ApplicationStore);
+  protected readonly store = inject(ApplicationStore);
 
-  switchLang() {
+  protected switchLang() {
     this.store.setLang(
       this.store.langSelected() === LANG.EN ? LANG.IT : LANG.EN
     );
   }
 
-  switchTheme() {
+  protected switchTheme() {
     this.store.setTheme(
       this.store.themeSelected() === THEME.DARK ? THEME.LIGHT : THEME.DARK
     );
   }
 
-  resetState() {
+  protected resetState() {
     this.store.resetPrefs();
   }
 }

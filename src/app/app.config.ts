@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   inject,
   isDevMode,
@@ -17,6 +17,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { appRoutes } from './router/app.routes';
 import { ApplicationStore } from './stores/application.store';
 import { initApp } from './functions/init.function';
+import { intercept } from './functions/http-interceptor.function';
 
 export const appConfig = {
   providers: [
@@ -25,11 +26,11 @@ export const appConfig = {
     provideRouter(
       appRoutes,
       withComponentInputBinding(),
-      withPreloading(isDevMode() ? NoPreloading : PreloadAllModules)
+      withPreloading(isDevMode() ? NoPreloading : PreloadAllModules),
     ),
 
     /** CONSIDER TO USE HttpClientModule FOR HttpRequest */
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([intercept])),
 
     /** CONSIDER TO USE ngx-translate FOR i18n */
     provideTranslateService({

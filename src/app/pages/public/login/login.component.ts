@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionUserService } from '../../../services/session/session-user.service';
 import { User } from '../../../models/user.model';
@@ -10,13 +10,9 @@ import { ROUTE } from '../../../router/routes/route';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export default class LoginComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private sessionUserService: SessionUserService,
-  ) {}
-
-  ngOnInit() {}
+export default class LoginComponent {
+  private readonly router = inject(Router);
+  private readonly sessionUserService = inject(SessionUserService);
 
   logIn() {
     const user = new User({

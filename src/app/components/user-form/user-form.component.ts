@@ -9,6 +9,7 @@ import {
   FieldTree,
   applyEach,
   SchemaPathTree,
+  FormField,
 } from '@angular/forms/signals';
 import { User } from '../../models/user.model';
 import { Address } from '../../models/address.model';
@@ -16,7 +17,7 @@ import { Address } from '../../models/address.model';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  imports: [Field, JsonPipe],
+  imports: [FormField, JsonPipe],
 })
 export class UserFormComponent {
   protected userListModel = signal<Partial<User>[]>([]);
@@ -45,7 +46,7 @@ export class UserFormComponent {
     this.userListModel.set([user]);
   }
 
-  public submit(): void {
+  protected submit(): void {
     if (this.userFormList().valid()) {
       console.log('Form Submitted', this.userFormList().value());
     } else {
@@ -53,7 +54,7 @@ export class UserFormComponent {
     }
   }
 
-  public updateFormValue(
+  protected updateFormValue(
     userForm: FieldTree<Partial<User>, string | number>
   ): void {
     userForm().value.update((u) => ({
@@ -63,28 +64,29 @@ export class UserFormComponent {
     }));
   }
 
-  public addUserForm(): void {
-    this.usersModel.update((form) => {
-      form.users.push({
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: new Address({
-          street: '',
-          city: '',
-          state: '',
-          zip: '',
-        }),
-      });
-      return form;
-    });
+  protected addUserForm(): void {
+    this.usersModel.update(({ users }) => ({
+      users: [
+        ...users,
+        {
+          firstName: '',
+          lastName: '',
+          email: '',
+          address: new Address({
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+          }),
+        },
+      ],
+    }));
   }
 
-  public deleteUserForm(index: number): void {
-    this.usersModel.update((form) => {
-      form.users.splice(index, 1);
-      return form;
-    });
+  protected deleteUserForm(index: number): void {
+    this.usersModel.update(({ users }) => ({
+      users: users.filter((_, i) => i !== index),
+    }));
   }
 }
 

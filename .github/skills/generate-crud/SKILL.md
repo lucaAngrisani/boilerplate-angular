@@ -18,9 +18,14 @@ Scaffold a complete CRUD feature (model, service, store, page, child components)
 
 ## Inputs
 - Resource name (for example: `users`, `products`, `orders`).
+   - If missing, ask the user which resource to scaffold before doing any file generation.
 - Optional target layout scope (`auth` or `public`).
 
 ## Procedure
+
+0. **Input check**:
+   - Verify the resource context is present (resource name/plural form).
+   - If the resource context is missing or ambiguous, ask a clarifying question and wait for the answer before proceeding.
 
 1. **Model** – create interfaces in `src/app/models/<resource>.model.ts`:
    - `<Resource>` (entity)
@@ -51,6 +56,7 @@ Scaffold a complete CRUD feature (model, service, store, page, child components)
    - No explicit or implicit `any`.
 
 ## Decision Points
+- If the resource context is not provided, explicitly ask which resource to generate (for example: users, products, orders) before scaffolding.
 - If routes require authentication, register under `auth.routes.ts`; otherwise use `public.routes.ts`.
 - If a shared form is needed for create and edit, keep a single `<resource>-form` page with route param handling.
 - If the dataset is simple, `<resource>-table` can be skipped in favor of `<resource>-card` only.

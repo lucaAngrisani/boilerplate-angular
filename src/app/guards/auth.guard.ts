@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, type CanActivateFn
 import { SessionUserService } from '../services/session/session-user.service';
 import { ROUTE } from '../router/routes/route';
 
-export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const authGuard: CanActivateFn = (_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) => {
   const router: Router = inject(Router);
   const sessionUserService: SessionUserService = inject(SessionUserService);
 

@@ -1,3 +1,7 @@
+import { isDevMode } from '@angular/core';
+
 export const initApp = async () => {
-  console.log('INIT APP');
+  if (isDevMode()) {
+    console.log('INIT APP');
+  }
 };
